@@ -33,21 +33,35 @@ export default function Home() {
 			{/* Footer */}
 			<footer className="bg-gray-900 text-gray-400 py-12">
 				<div className="mx-auto max-w-7xl px-6 sm:px-8">
-					<div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-						<div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+					<div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:items-center">
+						<div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 md:justify-self-start">
 							<div className="flex items-center gap-2">
 								<img src="/logo.png" alt="Tarsi Logo" className="h-8 w-8" />
 								<div className="text-white font-bold text-lg">Tarsi</div>
 							</div>
 							<p className="text-sm">Smart money management for everyone.</p>
 						</div>
-						<div className="flex flex-col md:flex-row md:items-center gap-6 text-sm">
-							<div className="flex items-center gap-6">
-								<h4 className="text-white font-semibold">Legal</h4>
-								<a href="/privacy" className="hover:text-white transition">Privacy</a>
-								<a href="/terms" className="hover:text-white transition">Terms</a>
+						<p className="text-gray-500 text-sm md:justify-self-center text-center">&copy; 2026 Tarsi. All rights reserved.</p>
+						<div className="flex flex-col gap-3 text-sm md:justify-self-end">
+							<div className="flex flex-col gap-3">
+								<div className="flex items-center gap-6">
+									<h4 className="text-white font-semibold">Legal</h4>
+									<a href="/privacy" className="hover:text-white transition">Privacy</a>
+									<a href="/terms" className="hover:text-white transition">Terms</a>
+								</div>
+								<div className="flex items-center gap-4">
+									<h4 className="text-white font-semibold">Contact</h4>
+									<a
+										href="https://www.facebook.com/tarsiapp"
+										target="_blank"
+										rel="noreferrer"
+										className="hover:text-white transition"
+									>
+										Facebook
+									</a>
+									<a href="mailto:bryllim@gmail.com" className="hover:text-white transition">Gmail</a>
+								</div>
 							</div>
-							<p className="text-gray-500">&copy; 2026 Tarsi. All rights reserved.</p>
 						</div>
 					</div>
 				</div>

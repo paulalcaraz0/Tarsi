@@ -19,12 +19,26 @@ const Sparkle = ({ className, delay = 0, size = "w-6 h-6" }: { className: string
 );
 
 const marqueeItems = [
+  "👥 Trusted by 500+ users",
   "🏆 #1 Top Selling Finance App",
   "⭐ #1 Paid App in All Categories",
   "📈 #1 Finance App on Google Play",
 ];
 
 export default function HeroSection() {
+  const [phoneOffset, setPhoneOffset] = React.useState({ x: 0, y: 0 });
+
+  const handlePhoneMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 24;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 24;
+    setPhoneOffset({ x, y });
+  };
+
+  const handlePhoneLeave = () => {
+    setPhoneOffset({ x: 0, y: 0 });
+  };
+
   return (
     <section
       id="home"
@@ -111,15 +125,22 @@ export default function HeroSection() {
             <Sparkle className="top-[24%] left-[36%]" delay={0.35} size="w-4 h-4 text-white/70" />
 
             <motion.div
-              animate={{ y: [-10, 10, -10] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              onMouseMove={handlePhoneMove}
+              onMouseLeave={handlePhoneLeave}
+              animate={{ x: phoneOffset.x, y: phoneOffset.y }}
+              transition={{ type: "spring", stiffness: 180, damping: 18, mass: 0.4 }}
               className="relative z-20 w-[60%] md:w-[45%] lg:w-[50%] max-w-[320px]"
             >
-              <img
-                src="/phone_onhand.png"
-                alt="Tarsi App on Hand"
-                className="w-full h-auto object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.8)]"
-              />
+              <motion.div
+                animate={{ y: [-10, 10, -10] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <img
+                  src="/phone_onhand.png"
+                  alt="Tarsi App on Hand"
+                  className="w-full h-auto object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.8)]"
+                />
+              </motion.div>
             </motion.div>
 
             <motion.div

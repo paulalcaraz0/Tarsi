@@ -135,9 +135,13 @@ const steps = [
 
 export default function ImpactSection() {
   return (
-    <section
+    <motion.section
       id="impact"
       className="relative w-full min-h-screen flex flex-col justify-center border-t border-gray-200 bg-[#EFFAF2] py-16 px-4 sm:px-6 lg:px-8 overflow-hidden scroll-mt-16"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
     >
       <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-[#3CB371]/10 blur-[120px] pointer-events-none z-0" />
 
@@ -154,27 +158,43 @@ export default function ImpactSection() {
       ))}
 
       <div className="relative z-10 mx-auto w-full max-w-[1200px]">
-        <div className="mb-12 text-center md:mb-14">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2E8B57]/20 bg-[#2E8B57]/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#1A4D2E] md:text-xs">
+        <motion.div
+          className="mb-12 text-center md:mb-14"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={{
+            hidden: { opacity: 0, y: 24 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.14 },
+            },
+          }}
+        >
+          <motion.span
+            variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}
+            className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2E8B57]/20 bg-[#2E8B57]/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#1A4D2E] md:text-xs"
+          >
             <span className="h-2 w-2 rounded-full bg-[#2E8B57]" />
             Real Impact
-          </span>
-          <h2 className="mb-4 text-4xl font-black tracking-tight text-[#0A2514] md:text-5xl">
+          </motion.span>
+          <motion.h2 variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0 } }} className="mb-4 text-4xl font-black tracking-tight text-[#0A2514] md:text-5xl">
             Join Thousands <span className="bg-gradient-to-r from-[#1A4D2E] to-[#3CB371] bg-clip-text text-transparent">Taking Control</span>
-          </h2>
-          <p className="mx-auto max-w-2xl text-base text-[#4A6755] md:text-lg">
+          </motion.h2>
+          <motion.p variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0 } }} className="mx-auto max-w-2xl text-base text-[#4A6755] md:text-lg">
             Three simple steps to transform your relationship with money and build a future you can be proud of.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-10">
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 40, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.65, delay: index * 0.16, ease: "easeOut" }}
               className="group relative cursor-default overflow-hidden rounded-[32px] border border-[#E8EFE9] bg-white/90 p-8 shadow-sm backdrop-blur-sm transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(46,139,87,0.15)] md:p-10 z-10"
             >
               <div className="pointer-events-none absolute -right-4 -top-8 z-0 select-none text-[80px] md:text-[150px] font-black leading-none text-[#A8B8AF] transition-colors duration-500 group-hover:text-[#95A79D]">
@@ -197,6 +217,6 @@ export default function ImpactSection() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

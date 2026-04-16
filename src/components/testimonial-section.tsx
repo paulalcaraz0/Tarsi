@@ -166,17 +166,17 @@ export default function TestimonialSection() {
                 href="https://www.facebook.com/groups/1243677331220736/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-fit items-center gap-3 rounded-2xl bg-[#1877F2] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1565D8] hover:shadow-lg hover:shadow-[#1877F2]/30"
+                className="inline-flex w-full max-w-full items-center justify-center gap-2 rounded-2xl bg-[#1877F2] px-4 py-3 text-center text-sm font-semibold leading-tight text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1565D8] hover:shadow-lg hover:shadow-[#1877F2]/30 sm:w-fit sm:gap-3 sm:px-6"
               >
-                <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                <svg className="h-5 w-5 shrink-0 fill-current" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                 </svg>
-                Join us on Facebook
+                Join us on Facebook Group
               </a>
             </div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="relative min-h-[320px] md:min-h-[380px]">
+          <motion.div variants={itemVariants} className="relative min-h-[560px] sm:min-h-[500px] md:min-h-[420px]">
             {reviews.map((review, index) => (
               <motion.div
                 key={review.id}
@@ -190,14 +190,14 @@ export default function TestimonialSection() {
                 transition={{ duration: 0.5, ease: "easeInOut" as const }}
                 style={{ zIndex: activeIndex === index ? 10 : 0 }}
               >
-                <div className="flex h-full flex-col rounded-3xl border border-[#E8EFE9] bg-[#F7FAF8] p-8 shadow-sm">
+                <div className="flex h-full flex-col rounded-3xl border border-[#E8EFE9] bg-[#F7FAF8] p-6 shadow-sm sm:p-8">
                   <div className="mb-5">
                     <StarRating rating={review.rating} />
                   </div>
 
                   <div className="relative mb-6 flex-1">
                     <Quote className="absolute -left-1 -top-1 h-7 w-7 rotate-180 text-[#2E8B57]/20" />
-                    <p className="relative z-10 pl-4 text-base font-medium leading-relaxed text-[#0A2514] md:text-lg">
+                    <p className="relative z-10 pl-4 text-base font-medium leading-relaxed text-[#0A2514] break-words md:text-lg">
                       &quot;{review.text}&quot;
                     </p>
                   </div>
