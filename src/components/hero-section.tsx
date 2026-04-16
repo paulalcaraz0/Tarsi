@@ -18,26 +18,8 @@ const Sparkle = ({ className, delay = 0, size = "w-6 h-6" }: { className: string
   </motion.svg>
 );
 
-const marqueeItems = [
-  "👥 Trusted by 500+ users",
-  "🏆 #1 Top Selling Finance App",
-  "⭐ #1 Paid App in All Categories",
-  "📈 #1 Finance App on Google Play",
-];
-
 export default function HeroSection() {
-  const [phoneOffset, setPhoneOffset] = React.useState({ x: 0, y: 0 });
-
-  const handlePhoneMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 24;
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 24;
-    setPhoneOffset({ x, y });
-  };
-
-  const handlePhoneLeave = () => {
-    setPhoneOffset({ x: 0, y: 0 });
-  };
+  const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
     <section
@@ -95,140 +77,56 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        <div className="lg:col-span-7 flex flex-col gap-6 w-full mt-10 lg:mt-0">
-          <div className="relative w-full h-[450px] md:h-[550px] bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-[40px] flex items-center justify-center shadow-2xl overflow-visible">
-            <Sparkle className="top-[8%] right-[14%]" delay={0.4} size="w-4 h-4 text-white/80" />
-            <Sparkle className="bottom-[14%] right-[22%]" delay={1.4} size="w-3 h-3 text-green-200" />
-            <Sparkle className="top-[28%] left-[20%]" delay={2.1} size="w-3 h-3 text-[#CCFF00]" />
-            <Sparkle className="top-[12%] left-[8%]" delay={0.7} size="w-3 h-3 text-green-200" />
-            <Sparkle className="top-[20%] right-[32%]" delay={1.1} size="w-4 h-4 text-white/70" />
-            <Sparkle className="bottom-[28%] left-[10%]" delay={2.8} size="w-3 h-3 text-[#CCFF00]" />
-            <Sparkle className="bottom-[10%] right-[10%]" delay={0.2} size="w-5 h-5 text-green-300" />
-            <Sparkle className="top-[46%] left-[6%]" delay={1.9} size="w-3 h-3 text-white/60" />
-            <Sparkle className="top-[40%] right-[6%]" delay={2.3} size="w-4 h-4 text-green-200" />
-            <Sparkle className="top-[8%] right-[4%]" delay={0.95} size="w-5 h-5 text-[#CCFF00]" />
-            <Sparkle className="top-[26%] right-[12%]" delay={1.7} size="w-4 h-4 text-white/75" />
-            <Sparkle className="bottom-[20%] right-[4%]" delay={2.6} size="w-5 h-5 text-green-300" />
-            <Sparkle className="top-[58%] right-[18%]" delay={0.6} size="w-3 h-3 text-[#CCFF00]" />
-            <Sparkle className="top-[8%] left-[4%]" delay={0.8} size="w-5 h-5 text-[#CCFF00]" />
-            <Sparkle className="top-[24%] left-[12%]" delay={1.6} size="w-4 h-4 text-white/75" />
-            <Sparkle className="bottom-[18%] left-[4%]" delay={2.5} size="w-5 h-5 text-green-300" />
-            <Sparkle className="top-[56%] left-[16%]" delay={0.5} size="w-3 h-3 text-[#CCFF00]" />
-            <Sparkle className="top-[14%] left-[1%]" delay={1.05} size="w-4 h-4 text-white/80" />
-            <Sparkle className="top-[34%] left-[2%]" delay={2.0} size="w-5 h-5 text-[#CCFF00]" />
-            <Sparkle className="bottom-[10%] left-[2%]" delay={1.45} size="w-4 h-4 text-green-200" />
-            <Sparkle className="top-[48%] left-[1%]" delay={2.7} size="w-3 h-3 text-white/70" />
-            <Sparkle className="top-[42%] left-[22%]" delay={1.25} size="w-5 h-5 text-green-200" />
-            <Sparkle className="top-[62%] left-[28%]" delay={2.15} size="w-4 h-4 text-[#CCFF00]" />
-            <Sparkle className="bottom-[24%] left-[18%]" delay={0.95} size="w-4 h-4 text-white/75" />
-            <Sparkle className="bottom-[8%] left-[22%]" delay={1.75} size="w-3 h-3 text-green-300" />
-            <Sparkle className="top-[24%] left-[36%]" delay={0.35} size="w-4 h-4 text-white/70" />
+        <div className="lg:col-span-7 mt-10 lg:mt-0 flex justify-center lg:justify-end lg:translate-x-20 xl:translate-x-28">
+          <div
+            id="mockupContainer"
+            className="relative flex h-[600px] w-full max-w-[1100px] cursor-pointer items-center justify-center overflow-visible px-4 sm:h-[660px] md:h-[720px]"
+            onClick={() => setIsExpanded((value) => !value)}
+            onMouseEnter={() => setIsExpanded(true)}
+             onMouseLeave={() => setIsExpanded(false)}
+          >
+            <div className="pointer-events-none absolute top-6 left-1/2 -translate-x-1/2 text-sm font-semibold tracking-[0.2em] text-[#666] sm:top-10">
+              Hover or click to expand screens
+            </div>
 
-            <motion.div
-              onMouseMove={handlePhoneMove}
-              onMouseLeave={handlePhoneLeave}
-              animate={{ x: phoneOffset.x, y: phoneOffset.y }}
-              transition={{ type: "spring", stiffness: 180, damping: 18, mass: 0.4 }}
-              className="relative z-20 w-[60%] md:w-[45%] lg:w-[50%] max-w-[320px]"
-            >
-              <motion.div
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <img
-                  src="/phone_onhand.png"
-                  alt="Tarsi App on Hand"
-                  className="w-full h-auto object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.8)]"
-                />
-              </motion.div>
-            </motion.div>
+            <motion.img
+              src="/left.png"
+              alt="Debt Tracker Screen"
+              className="absolute h-[560px] w-auto object-contain sm:h-[660px] md:h-[780px]"
+              animate={{
+                scale: 0.95,
+                y: 25,
+                x: isExpanded ? "-78%" : "-32%",
+                opacity: isExpanded ? 1 : 0.9,
+              }}
+              transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+            />
 
-            <motion.div
-              animate={{ y: [8, -8, 8] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute top-[10%] left-[2%] md:left-[10%] z-30 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] rotate-[-6deg]"
-            >
-              <p className="text-white/60 text-xs font-semibold mb-1">Savings Goal</p>
-              <p className="text-white font-bold">₱18,500</p>
-              <p className="text-[#3CB371] text-[10px] mt-1">+12% this week</p>
-            </motion.div>
+            <motion.img
+              src="/middle.png"
+              alt="Accounts Dashboard Screen"
+              className="absolute z-10 h-[620px] w-auto object-contain sm:h-[740px] md:h-[860px]"
+              animate={{
+                scale: 1,
+                y: 60,
+                x: 0,
+                opacity: 1,
+              }}
+              transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+            />
 
-            <motion.div
-              animate={{ y: [-12, 12, -12] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute bottom-[15%] left-[-2%] md:left-[5%] z-30 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] rotate-[4deg]"
-            >
-              <p className="text-white/60 text-xs font-semibold mb-1">Top Expense</p>
-              <p className="text-white font-bold flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#FF4500]"></span> Food
-              </p>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [12, -12, 12] }}
-              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-              className="absolute top-[35%] right-[-5%] md:right-[5%] z-30 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] rotate-[8deg]"
-            >
-              <p className="text-white/60 text-xs font-semibold mb-1">Net Worth</p>
-              <p className="text-white font-bold">₱124,450</p>
-              <div className="w-full h-1 bg-white/10 rounded-full mt-2">
-                <div className="w-[70%] h-full bg-[#3CB371] rounded-full shadow-[0_0_10px_rgba(60,179,113,0.8)]"></div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [6, -6, 6] }}
-              transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-              className="absolute top-[18%] right-[22%] z-20 rounded-xl border border-white/15 bg-white/5 px-3 py-2 backdrop-blur-md"
-            >
-              <p className="text-[10px] font-semibold text-white/70">Daily Budget</p>
-              <p className="text-xs font-bold text-white">₱750</p>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [-7, 7, -7] }}
-              transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
-              className="absolute bottom-[22%] right-[18%] z-20 rounded-xl border border-white/15 bg-white/5 px-3 py-2 backdrop-blur-md"
-            >
-              <p className="text-[10px] font-semibold text-white/70">Streak</p>
-              <p className="text-xs font-bold text-[#8DFFB0]">14 days</p>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [5, -5, 5] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-              className="absolute top-[56%] left-[18%] z-20 rounded-xl border border-white/15 bg-white/5 px-3 py-2 backdrop-blur-md"
-            >
-              <p className="text-[10px] font-semibold text-white/70">Goal</p>
-              <p className="text-xs font-bold text-white">82%</p>
-            </motion.div>
-          </div>
-
-          <div className="w-full h-24 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-[28px] shadow-2xl flex items-center overflow-hidden relative">
-            <Sparkle className="top-[18%] left-[20%]" delay={0.9} size="w-3 h-3 text-white/70" />
-            <Sparkle className="bottom-[16%] right-[24%]" delay={1.8} size="w-3 h-3 text-green-200" />
-            <Sparkle className="top-[22%] left-[42%]" delay={0.3} size="w-3 h-3 text-[#CCFF00]" />
-            <Sparkle className="bottom-[20%] left-[62%]" delay={2.4} size="w-3 h-3 text-white/75" />
-            <Sparkle className="top-[16%] right-[38%]" delay={1.2} size="w-4 h-4 text-green-300" />
-            <Sparkle className="bottom-[14%] right-[10%]" delay={2.9} size="w-3 h-3 text-[#CCFF00]" />
-
-            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#0d2214] to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#0d2214] to-transparent z-10" />
-
-            <motion.div
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ duration: 15, ease: "linear", repeat: Infinity }}
-              className="flex w-max items-center"
-            >
-              {[...marqueeItems, ...marqueeItems].map((text, i) => (
-                <div key={i} className="flex items-center px-8 md:px-12">
-                  <span className="text-white/90 text-sm md:text-base font-semibold tracking-wide whitespace-nowrap">
-                    {text}
-                  </span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#3CB371] ml-8 md:ml-12 opacity-50" />
-                </div>
-              ))}
-            </motion.div>
+            <motion.img
+  src="/right.png"
+  alt="Statistics Screen"
+  className="absolute h-[560px] w-auto object-contain sm:h-[660px] md:h-[780px]"
+  animate={{
+                scale: 1.02,
+    y: -10,
+    x: isExpanded ? "72%" : "32%",
+    opacity: isExpanded ? 1 : 0.9,
+  }}
+  transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+/>
           </div>
         </div>
       </div>
