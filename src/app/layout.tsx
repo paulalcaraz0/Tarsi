@@ -20,6 +20,11 @@ export const metadata: Metadata = {
 	description:
 		"Tarsi is a premium finance tracking app for expenses, goals, insights, subscriptions, and AI-powered money management.",
 	metadataBase: new URL("https://tarsi.app"),
+	icons: {
+		icon: "/logo.png",
+		shortcut: "/logo.png",
+		apple: "/logo.png",
+	},
 	openGraph: {
 		title: "Tarsi | Take Control of Your Finances",
 		description:
